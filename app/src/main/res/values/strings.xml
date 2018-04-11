@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">OfficeSnitch</string>
+    <string name="crime_title_label">Title of crime</string>
+    <string name="crime_hint">Enter the title of the crime here.</string>
+    <string name="crime_details_label">Details</string>
+    <string name="crime_solved_label">Solved</string>
+
+    <string-array name="severity_array">
+        <item>Infraction</item>item>
+        <item>Misdemeanor</item>item>
+        <item>Felony</item>item>
+        <item>War Crime</item>item>
+
+        </string-array>
+
+</resources>
