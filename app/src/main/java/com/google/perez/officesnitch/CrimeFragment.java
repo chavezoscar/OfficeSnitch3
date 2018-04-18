@@ -15,7 +15,11 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.UUID;
+
 public class CrimeFragment extends Fragment{
+
+    private static final String ARG_CRIME_ID = "crime_id";
 
     private Crime mCrime;
     private EditText mTitleField;
@@ -23,10 +27,27 @@ public class CrimeFragment extends Fragment{
     private CheckBox mSolvedCheckBox;
     private Spinner mSeveritySpinner;
 
+    //private Image Field
+
+
+
+    public static CrimeFragment newInstance(UUID crimeId){
+        Bundle bindle = new Bundle();
+        bindle.putSerializable(ARG_CRIME_ID, crimeId);
+
+
+        CrimeFragment frag = new CrimeFragment();
+        frag.setArguments(bindle);
+
+        return frag;
+    }
+
     @Override
     public void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCrime = new Crime();
+        UUID id = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
+        mCrime = CrimeLab.getCrimeLab(getActivity()).getCrime(id);
+        //mCrime = CrimeLab.get(getActivity()).getCrime(id);
     }
 
     @Override
@@ -35,6 +56,7 @@ public class CrimeFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_crime, container, false);
 
         mTitleField = (EditText) view.findViewById(R.id.crime_title);
+        mTitleField.setText(mCrime.getTitle());
 
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -64,7 +86,11 @@ public class CrimeFragment extends Fragment{
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.severity_array,
                 android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
         mSeveritySpinner.setAdapter(adapter);
+        mSeveritySpinner.setSelection(mCrime.getSeverity());
+
 
         mSeveritySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -79,7 +105,7 @@ public class CrimeFragment extends Fragment{
         });
 
         mSolvedCheckBox = (CheckBox) view.findViewById(R.id.crime_solved);
-
+        mSolvedCheckBox.setChecked(mCrime.isSolved());
         mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
