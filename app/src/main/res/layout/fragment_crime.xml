@@ -40,5 +40,19 @@
         android:layout_height="wrap_content"
         android:text="@string/crime_solved_label"/>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+             <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/go_to_first_button"
+                android:text="@string/first"/>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

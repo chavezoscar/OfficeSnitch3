@@ -1,12 +1,15 @@
 package com.google.perez.officesnitch;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ActionMenuView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,6 +29,7 @@ public class CrimeFragment extends Fragment{
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
     private Spinner mSeveritySpinner;
+    private Button mFirstButton;
 
     //private Image Field
 
@@ -110,6 +114,16 @@ public class CrimeFragment extends Fragment{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mCrime.setSolved(isChecked);
+            }
+        });
+
+        mFirstButton = (Button) view.findViewById(R.id.go_to_first_button);
+        mFirstButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CrimePagerActivity a = (CrimePagerActivity) getActivity();
+               ViewPager vp = a.getViewPager();
+               vp.setCurrentItem(0, false);
             }
         });
 

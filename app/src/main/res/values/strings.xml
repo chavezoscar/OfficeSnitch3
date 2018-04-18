@@ -4,6 +4,10 @@
     <string name="crime_hint">Enter the title of the crime here.</string>
     <string name="crime_details_label">Details</string>
     <string name="crime_solved_label">Solved</string>
+    <string name="first">first</string>
+    <string name="last">Last</string>
+    <string name="date_picker">Date of Crime</string>
+
 
     <string-array name="severity_array">
         <item>Infraction</item>item>
