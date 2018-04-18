@@ -1,8 +1,10 @@
 package com.google.perez.officesnitch;
 
 import android.app.Activity;
+//import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,6 +32,8 @@ public class CrimeFragment extends Fragment{
     private CheckBox mSolvedCheckBox;
     private Spinner mSeveritySpinner;
     private Button mFirstButton;
+
+    private static final String DIALOG_DATE = "DialogDate";
 
     //private Image Field
 
@@ -84,7 +88,14 @@ public class CrimeFragment extends Fragment{
         mDateButton = (Button) view.findViewById(R.id.crime_date);
         mDateButton.setText(mCrime.getDate().toString());
 
-        mDateButton.setEnabled(false);
+        mDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                DatePickerFragment dialog = new DatePickerFragment();
+                dialog.show(manager, DIALOG_DATE);
+            }
+        });
 
         mSeveritySpinner = (Spinner) view.findViewById(R.id.severity_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.severity_array,
