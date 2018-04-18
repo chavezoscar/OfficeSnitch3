@@ -17,7 +17,7 @@ import java.util.UUID;
 public class CrimePagerActivity extends FragmentActivity{
 
 
-    private static final String EXTRA_CRIME_ID = "com.google.perez.officesnitch"
+    private static final String EXTRA_CRIME_ID = "com.google.perez.officesnitch";
 
     private ViewPager mViewPager;
     private List<Crime> mCrimes;
@@ -25,14 +25,15 @@ public class CrimePagerActivity extends FragmentActivity{
     public static Intent newIntent(Context context, UUID crimeId){
         Intent i = new Intent(context, CrimePagerActivity.class);
         i.putExtra(EXTRA_CRIME_ID, crimeId);
+        return i;
     }
 
 
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crime_pager);
 
 
@@ -52,8 +53,18 @@ public class CrimePagerActivity extends FragmentActivity{
             @Override
             public int getCount() {
                 return mCrimes.size();
+
+
             }
         });
+
+        for (int i = 0; i < mCrimes.size(); i++){
+            if(mCrimes.get(i).getId().equals(crimeId)){
+                mViewPager.setCurrentItem(i, true);
+                break;
+            }
+        }
+
 
 
     }
